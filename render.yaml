@@ -30,3 +30,13 @@ services:
         sync: false
       - key: RAZORPAY_KEY_SECRET
         sync: false
+
+  - type: web
+    name: devshala-frontend
+    runtime: node
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    startCommand: npm run preview
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://devshala-1.onrender.com
