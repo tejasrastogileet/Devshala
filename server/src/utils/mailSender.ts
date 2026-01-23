@@ -1,11 +1,6 @@
-import nodemailer from 'nodemailer';
+import nodemailer, { SentMessageInfo } from 'nodemailer';
 
-interface MailSenderResponse {
-    messageId?: string;
-    accepted?: string[];
-    rejected?: string[];
-    response?: string;
-}
+type MailSenderResponse = SentMessageInfo;
 
 const mailSender = async (
     email: string,
