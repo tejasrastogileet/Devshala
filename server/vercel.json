@@ -1,0 +1,23 @@
+{
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/**.js": {
+      "memory": 512,
+      "maxDuration": 30
+    }
+  },
+  "env": {
+    "MONGODB_URL": "@mongodb_url",
+    "JWT_SECRET": "@jwt_secret",
+    "MAIL_HOST": "@mail_host",
+    "MAIL_USER": "@mail_user",
+    "MAIL_PASS": "@mail_pass",
+    "MAIL_FROM_EMAIL": "tejasrastogi456@gmail.com",
+    "CLOUD_NAME": "@cloud_name",
+    "API_KEY": "@api_key",
+    "API_SECRET": "@api_secret",
+    "RAZORPAY_KEY_ID": "@razorpay_key_id",
+    "RAZORPAY_KEY_SECRET": "@razorpay_key_secret"
+  }
+}
