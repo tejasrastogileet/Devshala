@@ -5,10 +5,10 @@ dotenv.config();
 
 export const connectDB = async (): Promise<void> => {
     try {
-        const mongoUri = process.env.MONGODB_URL;
+        const mongoUri = process.env.DATABASE_URL;
         
         if (!mongoUri) {
-            throw new Error('MONGODB_URL environment variable is not defined');
+            throw new Error('DATABASE_URL environment variable is not defined');
         }
 
         // Log connection string with masked credentials

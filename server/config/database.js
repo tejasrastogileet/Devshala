@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 exports.connectDB = () => {
-    const mongoUri = process.env.MONGODB_URL;
+    const mongoUri = process.env.DATABASE_URL;
     
     if (!mongoUri) {
-        console.error('ERROR: MONGODB_URL environment variable is not defined');
+        console.error('ERROR: DATABASE_URL environment variable is not defined');
         process.exit(1);
     }
 
