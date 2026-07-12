@@ -17,6 +17,13 @@ const profileRoutes = require('./routes/profile');
 const paymentRoutes = require('./routes/payments');
 const courseRoutes = require('./routes/course');
 
+console.log('[Server] Routes loaded:', {
+  userRoutes: typeof userRoutes,
+  profileRoutes: typeof profileRoutes,
+  paymentRoutes: typeof paymentRoutes,
+  courseRoutes: typeof courseRoutes,
+});
+
 
 // middleware 
 app.use(express.json()); // to parse json body
@@ -47,10 +54,12 @@ connectDB();
 cloudinaryConnect();
 
 // mount route
+console.log('[Server] Mounting routes at /api/v1/*');
 app.use('/api/v1/auth', userRoutes);
 app.use('/api/v1/profile', profileRoutes);
 app.use('/api/v1/payment', paymentRoutes);
 app.use('/api/v1/course', courseRoutes);
+console.log('[Server] Routes mounted successfully');
 
 
 

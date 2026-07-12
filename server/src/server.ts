@@ -3,16 +3,26 @@ import fileUpload from 'express-fileupload';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
 
 // connection to DB and cloudinary
 import { connectDB } from './config/database';
 import { cloudinaryConnect } from './config/cloudinary';
 
-// routes - using JavaScript versions until TypeScript migration is complete
-const userRoutes = require('../routes/user');
-const profileRoutes = require('../routes/profile');
-const paymentRoutes = require('../routes/payments');
-const courseRoutes = require('../routes/course');
+// routes - using JavaScript versions from parent directory (not compiled by tsc)
+// After compilation, these resolve to ../routes/ which is outside dist/
+const userRoutes = require(path.join(__dirname, '../routes/user'));
+const profileRoutes = require(path.join(__dirname, '../routes/profile'));
+const paymentRoutes = require(path.join(__dirname, '../routes/payments'));
+const courseRoutes = require(path.join(__dirname, '../routes/course'));
+
+// Log to verify routes are loaded
+console.log('[Server] Routes loaded:', {
+  userRoutes: typeof userRoutes,
+  profileRoutes: typeof profileRoutes,
+  paymentRoutes: typeof paymentRoutes,
+  courseRoutes: typeof courseRoutes,
+});
 
 dotenv.config();
 
@@ -45,10 +55,12 @@ connectDB();
 cloudinaryConnect();
 
 // mount route
+console.log('[Server] Mounting routes at /api/v1/*');
 app.use('/api/v1/auth', userRoutes);
 app.use('/api/v1/profile', profileRoutes);
 app.use('/api/v1/payment', paymentRoutes);
 app.use('/api/v1/course', courseRoutes);
+console.log('[Server] Routes mounted successfully');
 
 // Default Route
 app.get('/', (req: Request, res: Response) => {
